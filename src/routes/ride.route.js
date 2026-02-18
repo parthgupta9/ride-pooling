@@ -3,14 +3,17 @@ import {
   createRideRequest,
   getRideRequest,
   cancelRideRequest,
+} from "../controllers/ride-request.controller.js";
+import {
   getActivePools,
   getPoolDetails,
+} from "../controllers/ride-pool.controller.js";
+import {
   rateRide,
   getUserRideHistory,
-  getPriceEstimate,
-  getHealth,
-  getMetrics,
-} from "../controllers/ride.controller.js";
+} from "../controllers/user.controller.js";
+import { getPriceEstimate } from "../controllers/estimate.controller.js";
+import { getHealth, getMetrics } from "../controllers/system.controller.js";
 
 const router = express.Router();
 
