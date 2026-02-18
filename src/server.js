@@ -1,4 +1,9 @@
 import 'dotenv/config';
+import dns from "node:dns/promises";
+
+// 🔥 Force Cloudflare DNS (fixes SRV ECONNREFUSED issue)
+dns.setServers(["1.1.1.1", "1.0.0.1"]);
+
 import http from "http";
 import app from "./app.js";
 import { initWebSocket } from "./websocket/socket.js";
