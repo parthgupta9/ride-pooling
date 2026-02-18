@@ -1,0 +1,391 @@
+{
+  "info": {
+    "name": "Ride Pooling API",
+    "description": "Complete API documentation for Smart Airport Ride Pooling Backend System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Ride Requests",
+      "item": [
+        {
+          "name": "Create Ride Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"user123\",\n  \"pickupLocation\": {\n    \"latitude\": 40.7128,\n    \"longitude\": -74.0060,\n    \"address\": \"JFK Airport Terminal 1\"\n  },\n  \"dropoffLocation\": {\n    \"latitude\": 40.7589,\n    \"longitude\": -73.9851,\n    \"address\": \"Times Square, NYC\"\n  },\n  \"passengers\": 2,\n  \"luggage\": 1,\n  \"maxDetour\": 10\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/rides/request",
+              "host": ["{{base_url}}"],
+              "path": ["rides", "request"]
+            },
+            "description": "Creates a new ride request and adds it to the processing queue. Returns estimate price and queue position."
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"user123\",\n  \"pickupLocation\": {\n    \"latitude\": 40.7128,\n    \"longitude\": -74.0060\n  },\n  \"dropoffLocation\": {\n    \"latitude\": 40.7589,\n    \"longitude\": -73.9851\n  },\n  \"passengers\": 2,\n  \"luggage\": 1,\n  \"maxDetour\": 10\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/rides/request",
+                  "host": ["{{base_url}}"],
+                  "path": ["rides", "request"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Ride request created successfully\",\n  \"requestId\": \"65f8a1b2c3d4e5f6a7b8c9d0\",\n  \"status\": \"pending\",\n  \"estimatedPrice\": 23.5,\n  \"priceBreakdown\": {\n    \"baseFare\": 13.75,\n    \"distance\": 5.2,\n    \"duration\": 15,\n    \"multipliers\": {\n      \"peakHour\": 1.5,\n      \"weekend\": 1.0,\n      \"surge\": 1.1,\n      \"poolDiscount\": 0.75,\n      \"total\": 1.24\n    },\n    \"finalPrice\": 23.5\n  },\n  \"queuePosition\": 3\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Ride Request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/rides/:requestId",
+              "host": ["{{base_url}}"],
+              "path": ["rides", ":requestId"],
+              "variable": [
+                {
+                  "key": "requestId",
+                  "value": "65f8a1b2c3d4e5f6a7b8c9d0",
+                  "description": "The ID of the ride request"
+                }
+              ]
+            },
+            "description": "Retrieves details of a specific ride request including its status and pool assignment if matched."
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Ride Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Plans changed\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/rides/:requestId/cancel",
+              "host": ["{{base_url}}"],
+              "path": ["rides", ":requestId", "cancel"],
+              "variable": [
+                {
+                  "key": "requestId",
+                  "value": "65f8a1b2c3d4e5f6a7b8c9d0"
+                }
+              ]
+            },
+            "description": "Cancels a pending ride request. Cannot cancel if already assigned or completed."
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for managing ride requests"
+    },
+    {
+      "name": "Pools",
+      "item": [
+        {
+          "name": "Get Active Pools",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/rides/pools?status=active&limit=10&offset=0",
+              "host": ["{{base_url}}"],
+              "path": ["rides", "pools"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "active",
+                  "description": "Filter by pool status (pending, active, completed, cancelled)"
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of results to return"
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip"
+                }
+              ]
+            },
+            "description": "Retrieves a list of ride pools filtered by status with pagination support."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Pool Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/rides/pools/:poolId",
+              "host": ["{{base_url}}"],
+              "path": ["rides", "pools", ":poolId"],
+              "variable": [
+                {
+                  "key": "poolId",
+                  "value": "65f8a1b2c3d4e5f6a7b8c9d1"
+                }
+              ]
+            },
+            "description": "Gets detailed information about a specific ride pool including all associated requests."
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for viewing ride pools"
+    },
+    {
+      "name": "Pricing",
+      "item": [
+        {
+          "name": "Get Price Estimate",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/rides/estimate-price?pickupLatitude=40.7128&pickupLongitude=-74.0060&dropoffLatitude=40.7589&dropoffLongitude=-73.9851&passengers=2&isPool=true",
+              "host": ["{{base_url}}"],
+              "path": ["rides", "estimate-price"],
+              "query": [
+                {
+                  "key": "pickupLatitude",
+                  "value": "40.7128",
+                  "description": "Pickup location latitude"
+                },
+                {
+                  "key": "pickupLongitude",
+                  "value": "-74.0060",
+                  "description": "Pickup location longitude"
+                },
+                {
+                  "key": "dropoffLatitude",
+                  "value": "40.7589",
+                  "description": "Dropoff location latitude"
+                },
+                {
+                  "key": "dropoffLongitude",
+                  "value": "-73.9851",
+                  "description": "Dropoff location longitude"
+                },
+                {
+                  "key": "passengers",
+                  "value": "2",
+                  "description": "Number of passengers"
+                },
+                {
+                  "key": "isPool",
+                  "value": "true",
+                  "description": "Whether this is a pooled ride (true/false)"
+                }
+              ]
+            },
+            "description": "Calculates price estimate based on pickup/dropoff locations, current demand, and pooling preferences."
+          },
+          "response": [
+            {
+              "name": "Price Estimate Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/rides/estimate-price?pickupLatitude=40.7128&pickupLongitude=-74.0060&dropoffLatitude=40.7589&dropoffLongitude=-73.9851&passengers=2&isPool=true",
+                  "host": ["{{base_url}}"],
+                  "path": ["rides", "estimate-price"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"estimate\": {\n    \"baseFare\": 13.75,\n    \"distance\": 5.2,\n    \"duration\": 15,\n    \"multipliers\": {\n      \"peakHour\": 1.5,\n      \"weekend\": 1.0,\n      \"surge\": 1.1,\n      \"poolDiscount\": 0.75,\n      \"weather\": 1.0,\n      \"total\": 1.24\n    },\n    \"finalPrice\": 17.05,\n    \"estimatedBreakdown\": {\n      \"baseFare\": 13.75,\n      \"surgeCharge\": 1.38,\n      \"poolSavings\": 3.44,\n      \"weatherCharge\": 0\n    }\n  },\n  \"queueInfo\": {\n    \"currentQueueSize\": 3,\n    \"estimatedWaitTime\": \"0.3 seconds\"\n  }\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Price estimation endpoints"
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get User Ride History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/rides/user/:userId/history?limit=20&offset=0&status=completed",
+              "host": ["{{base_url}}"],
+              "path": ["rides", "user", ":userId", "history"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of results"
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                },
+                {
+                  "key": "status",
+                  "value": "completed",
+                  "description": "Filter by status (optional)"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "user123"
+                }
+              ]
+            },
+            "description": "Retrieves ride history for a specific user with statistics."
+          },
+          "response": []
+        },
+        {
+          "name": "Rate a Ride",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"user123\",\n  \"rating\": 5,\n  \"feedback\": \"Great ride! Driver was very professional.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/rides/:poolId/rate",
+              "host": ["{{base_url}}"],
+              "path": ["rides", ":poolId", "rate"],
+              "variable": [
+                {
+                  "key": "poolId",
+                  "value": "65f8a1b2c3d4e5f6a7b8c9d1"
+                }
+              ]
+            },
+            "description": "Allows user to rate a completed ride (1-5 stars) with optional feedback."
+          },
+          "response": []
+        }
+      ],
+      "description": "User-specific endpoints"
+    },
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/rides/health",
+              "host": ["{{base_url}}"],
+              "path": ["rides", "health"]
+            },
+            "description": "Checks system health including database connections, queue size, and active pools."
+          },
+          "response": [
+            {
+              "name": "Healthy System",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/rides/health",
+                  "host": ["{{base_url}}"],
+                  "path": ["rides", "health"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"healthy\",\n  \"timestamp\": \"2026-02-18T10:00:00.000Z\",\n  \"queue\": {\n    \"size\": 0,\n    \"estimatedProcessingTime\": \"0.0 seconds\"\n  },\n  \"pools\": {\n    \"active\": 5\n  },\n  \"requests\": {\n    \"pending\": 0,\n    \"completedToday\": 127\n  },\n  \"services\": {\n    \"mongodb\": \"connected\",\n    \"redis\": \"connected\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get System Metrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/rides/metrics?days=7",
+              "host": ["{{base_url}}"],
+              "path": ["rides", "metrics"],
+              "query": [
+                {
+                  "key": "days",
+                  "value": "7",
+                  "description": "Number of days to analyze (default: 7)"
+                }
+              ]
+            },
+            "description": "Provides system metrics and analytics for the specified time period."
+          },
+          "response": []
+        }
+      ],
+      "description": "System monitoring and health endpoints"
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}

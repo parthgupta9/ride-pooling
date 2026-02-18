@@ -1,0 +1,172 @@
+[
+  {
+    "name": "Request 1 - JFK to Times Square",
+    "userId": "user001",
+    "pickupLocation": {
+      "latitude": 40.6413,
+      "longitude": -73.7781,
+      "address": "JFK Airport, Terminal 1"
+    },
+    "dropoffLocation": {
+      "latitude": 40.7580,
+      "longitude": -73.9855,
+      "address": "Times Square, Manhattan"
+    },
+    "passengers": 2,
+    "luggage": 2,
+    "maxDetour": 15
+  },
+  {
+    "name": "Request 2 - JFK to Midtown",
+    "userId": "user002",
+    "pickupLocation": {
+      "latitude": 40.6398,
+      "longitude": -73.7789,
+      "address": "JFK Airport, Terminal 4"
+    },
+    "dropoffLocation": {
+      "latitude": 40.7549,
+      "longitude": -73.9840,
+      "address": "Grand Central Terminal"
+    },
+    "passengers": 1,
+    "luggage": 1,
+    "maxDetour": 10
+  },
+  {
+    "name": "Request 3 - JFK to Upper East Side",
+    "userId": "user003",
+    "pickupLocation": {
+      "latitude": 40.6395,
+      "longitude": -73.7789,
+      "address": "JFK Airport, Terminal 5"
+    },
+    "dropoffLocation": {
+      "latitude": 40.7736,
+      "longitude": -73.9566,
+      "address": "Upper East Side, Manhattan"
+    },
+    "passengers": 1,
+    "luggage": 0,
+    "maxDetour": 12
+  },
+  {
+    "name": "Request 4 - LaGuardia to Brooklyn",
+    "userId": "user004",
+    "pickupLocation": {
+      "latitude": 40.7769,
+      "longitude": -73.8740,
+      "address": "LaGuardia Airport, Terminal B"
+    },
+    "dropoffLocation": {
+      "latitude": 40.6782,
+      "longitude": -73.9442,
+      "address": "Brooklyn, NY"
+    },
+    "passengers": 3,
+    "luggage": 3,
+    "maxDetour": 8
+  },
+  {
+    "name": "Request 5 - LaGuardia to Queens",
+    "userId": "user005",
+    "pickupLocation": {
+      "latitude": 40.7747,
+      "longitude": -73.8719,
+      "address": "LaGuardia Airport, Terminal C"
+    },
+    "dropoffLocation": {
+      "latitude": 40.7282,
+      "longitude": -73.7949,
+      "address": "Queens, NY"
+    },
+    "passengers": 2,
+    "luggage": 1,
+    "maxDetour": 10
+  },
+  {
+    "name": "Request 6 - Newark to Manhattan",
+    "userId": "user006",
+    "pickupLocation": {
+      "latitude": 40.6895,
+      "longitude": -74.1745,
+      "address": "Newark Airport, Terminal A"
+    },
+    "dropoffLocation": {
+      "latitude": 40.7580,
+      "longitude": -73.9855,
+      "address": "Times Square, Manhattan"
+    },
+    "passengers": 1,
+    "luggage": 2,
+    "maxDetour": 15
+  },
+  {
+    "name": "Request 7 - JFK to Financial District",
+    "userId": "user007",
+    "pickupLocation": {
+      "latitude": 40.6413,
+      "longitude": -73.7781,
+      "address": "JFK Airport, Terminal 1"
+    },
+    "dropoffLocation": {
+      "latitude": 40.7074,
+      "longitude": -74.0113,
+      "address": "Financial District, Manhattan"
+    },
+    "passengers": 1,
+    "luggage": 1,
+    "maxDetour": 10
+  },
+  {
+    "name": "Request 8 - JFK to Chelsea",
+    "userId": "user008",
+    "pickupLocation": {
+      "latitude": 40.6398,
+      "longitude": -73.7789,
+      "address": "JFK Airport, Terminal 4"
+    },
+    "dropoffLocation": {
+      "latitude": 40.7465,
+      "longitude": -74.0014,
+      "address": "Chelsea, Manhattan"
+    },
+    "passengers": 2,
+    "luggage": 1,
+    "maxDetour": 12
+  },
+  {
+    "name": "Request 9 - JFK to Williamsburg",
+    "userId": "user009",
+    "pickupLocation": {
+      "latitude": 40.6395,
+      "longitude": -73.7789,
+      "address": "JFK Airport, Terminal 5"
+    },
+    "dropoffLocation": {
+      "latitude": 40.7081,
+      "longitude": -73.9571,
+      "address": "Williamsburg, Brooklyn"
+    },
+    "passengers": 1,
+    "luggage": 0,
+    "maxDetour": 15
+  },
+  {
+    "name": "Request 10 - LaGuardia to Astoria",
+    "userId": "user010",
+    "pickupLocation": {
+      "latitude": 40.7769,
+      "longitude": -73.8740,
+      "address": "LaGuardia Airport, Terminal B"
+    },
+    "dropoffLocation": {
+      "latitude": 40.7614,
+      "longitude": -73.9246,
+      "address": "Astoria, Queens"
+    },
+    "passengers": 2,
+    "luggage": 2,
+    "maxDetour": 10
+  }
+]
